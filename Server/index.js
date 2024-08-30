@@ -1,6 +1,6 @@
 const express = require("express");
-const allRoutes = require("./src/App");
 const cors = require("cors");
+const allRoutes = require("./src/App");
 require("dotenv").config();
 require("./src/db/config");
 
@@ -12,4 +12,3 @@ app.use("/api", allRoutes);
 app.listen(process.env.PORT, () => {
   console.log(`server started at port ${process.env.PORT}`);
 });
-    

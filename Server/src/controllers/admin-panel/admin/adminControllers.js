@@ -1,5 +1,7 @@
 require("dotenv").config();
+const nodemailer = require("nodemailer");
 const Admin = require("./../../../models/admin/admin");
+const otpMap = require("../../../variables/variables");
 
 const adminRegister = async () => {
   const AdminFromDB = await Admin.find();
@@ -30,14 +32,53 @@ const loginAdmin = async (req, res) => {
   }
 };
 
-const generateOTP = (req, res) => {
+const generateOtp = async (req, res) => {
   try {
+    const { email } = req.body;
 
-    
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.ADMIN_MAIL,
+        pass: process.env.ADMIN_APP_PASSWORD,
+      },
+    });
+
+    const otp = Math.floor(Math.random() * 1000000);
+
+    const otpMapVariable = otpMap;
+    otpMapVariable.set(email, otp);
+    console.log(otpMapVariable);
+
+    const mailOptions = {
+      from: "noreply@gmail.com",
+      to: email,
+      subject: "OTP for email update",
+      text: `your otp is ${otp}. It is valid for 30s.`,
+    };
+
+    transporter.sendMail(mailOptions, (error, success) => {
+      if (error)
+        return res.status(500).json({ message: "OTP could not generate." });
+
+      res.status(200).json({ message: "OTP sent successfully." });
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
-module.exports = { adminRegister, loginAdmin };
+const updateEmail = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const otpMapVariable = otpMap;
+    console.log(_id, otpMapVariable.get("chandrikaharsha610@gmail.com"));
+    res.status(200).json({ message: "ok" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { adminRegister, loginAdmin, updateEmail, generateOtp };
