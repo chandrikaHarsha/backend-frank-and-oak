@@ -30,4 +30,14 @@ const loginAdmin = async (req, res) => {
   }
 };
 
+const generateOTP = (req, res) => {
+  try {
+
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = { adminRegister, loginAdmin };
