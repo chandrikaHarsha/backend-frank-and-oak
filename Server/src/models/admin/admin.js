@@ -2,14 +2,16 @@ const mongoose = require("mongoose");
 
 const adminSchema = new mongoose.Schema({
   name: String,
-  facebook: String,
+  profile: String,
+  fb: String,
   instagram: String,
   LinkedIn: String,
   twitter: String,
-  Pinterest: String,
+  youtube: String,
+  pinterest: String,
   logo: String,
-  fav_icon: String,
-  footer_logo: String,
+  favicon: String,
+  footer_icon: String,
   password: String,
   email: String,
 });

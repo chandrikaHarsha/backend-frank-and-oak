@@ -1,3 +1,4 @@
+const fs = require("fs");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 const Admin = require("./../../../models/admin/admin");
@@ -19,6 +20,7 @@ const adminRegister = async () => {
 
 const loginAdmin = async (req, res) => {
   try {
+    // console.log(req.body);
     const ifValidEmail = await Admin.find({ email: req.body.email });
 
     if (ifValidEmail.length === 0)
@@ -71,14 +73,78 @@ const generateOtp = async (req, res) => {
 
 const updateEmail = async (req, res) => {
   try {
-    const { _id } = req.params;
     const otpMapVariable = otpMap;
-    console.log(_id, otpMapVariable.get("chandrikaharsha610@gmail.com"));
-    res.status(200).json({ message: "ok" });
+    const sentOTP = otpMapVariable.get("chandrikaharsha610@gmail.com");
+    if (sentOTP !== Number(req.body.otp))
+      return res.status(401).json({ message: "Enter a valid otp." });
+    const response = await Admin.updateOne(req.params, {
+      $set: { email: req.body.new_email },
+    });
+    res.status(200).json({ message: "Email updated.", data: response });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error." });
   }
 };
 
-module.exports = { adminRegister, loginAdmin, updateEmail, generateOtp };
+const updateAdminProfile = async (req, res) => {
+  try {
+    const data = req.body;
+    if (req.files) {
+      if (req.files.logo) {
+        data.logo = req.files.logo[0].filename;
+      }
+      if (req.files.favicon) {
+        data.favicon = req.files.favicon[0].filename;
+      }
+      if (req.files.footer_icon) {
+        data.footer_icon = req.files.footer_icon[0].filename;
+      }
+      if (req.files.profile) {
+        data.profile = req.files.profile[0].filename;
+      }
+    }
+    const preData = await Admin.findById(req.params._id);
+    if (preData) {
+      if (preData.password) {
+        data.password = preData.password;
+      }
+      if (preData.email) {
+        data.email = preData.email;
+      }
+      if (preData.logo) {
+        if (fs.existsSync(preData.logo)) {
+          fs.unlinkSync(preData.logo);
+        }
+      }
+      if (preData.favicon) {
+        if (fs.existsSync(preData.favicon)) {
+          fs.unlinkSync(preData.favicon);
+        }
+      }
+      if (preData.footer_icon) {
+        if (fs.existsSync(preData.footer_icon)) {
+          fs.unlinkSync(preData.footer_icon);
+        }
+      }
+      if (preData.profile) {
+        if (fs.existsSync(preData.profile)) {
+          fs.unlinkSync(preData.profile);
+        }
+      }
+    }
+    const response = await Admin.updateOne(req.params, { $set: data });
+    res.status(200).json({ message: "Data Received.", data: response });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+module.exports = {
+  adminRegister,
+  loginAdmin,
+  updateEmail,
+  generateOtp,
+  updateAdminProfile,
+};
