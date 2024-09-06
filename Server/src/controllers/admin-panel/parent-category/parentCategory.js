@@ -31,7 +31,7 @@ const updateStatus = async (req, res) => {
     const response = await parentCategory.updateOne(req.params, {
       $set: { status: req.body.text },
     });
-    res.status(200).json({ message: "Status updated.", data: "response" });
+    res.status(200).json({ message: "Status updated.", data: response });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error." });
@@ -51,9 +51,39 @@ const readParentCategoryById = async (req, res) => {
   }
 };
 
+const updateCategory = async (req, res) => {
+  try {
+    const { name, description } = req.body;
+    const response = await parentCategory.updateOne(req.params, {
+      $set: {
+        name,
+        description,
+      },
+    });
+    res
+      .status(200)
+      .json({ message: "Category updated successfully.", date: response });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server Error." });
+  }
+};
+
+const deleteParentCategory = async (req, res) => {
+  try {
+    const response = await parentCategory.deleteOne(req.params);
+    res.status(200).json({ message: "deleted successfully.", data: response });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
+
 module.exports = {
   parentCategories,
   readParentCategory,
   updateStatus,
   readParentCategoryById,
+  updateCategory,
+  deleteParentCategory,
 };

@@ -11,9 +11,11 @@ const {
   readParentCategory,
   updateStatus,
   readParentCategoryById,
+  updateCategory,
+  deleteParentCategory,
 } = require("./admin-panel/parent-category/parentCategory");
 // Size
-const { Size } = require("./admin-panel/sizes/size");
+const { Size, readSize, updateSizeStatus } = require("./admin-panel/sizes/size");
 // admin controllers
 
 module.exports = {
@@ -27,4 +29,8 @@ module.exports = {
   readParentCategory,
   updateStatus,
   readParentCategoryById,
+  updateCategory,
+  deleteParentCategory,
+  readSize,
+  updateSizeStatus
 };
