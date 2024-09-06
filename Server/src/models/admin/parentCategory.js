@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const parentCategorySchema = mongoose.Schema({
   name: "String",
   description: "String",
-  status: "String",
+  status: "Boolean",
 });
 
 const parentCategory = mongoose.model(

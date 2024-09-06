@@ -8,6 +8,9 @@ const {
 } = require("./admin-panel/admin/adminControllers");
 const {
   parentCategories,
+  readParentCategory,
+  updateStatus,
+  readParentCategoryById,
 } = require("./admin-panel/parent-category/parentCategory");
 // Size
 const { Size } = require("./admin-panel/sizes/size");
@@ -21,4 +24,7 @@ module.exports = {
   updateAdminProfile,
   Size,
   parentCategories,
+  readParentCategory,
+  updateStatus,
+  readParentCategoryById,
 };
