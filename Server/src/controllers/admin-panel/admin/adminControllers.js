@@ -56,7 +56,7 @@ const generateOtp = async (req, res) => {
       from: "noreply@gmail.com",
       to: email,
       subject: "OTP for email update",
-      text: `your otp is ${otp}. It is valid for 30s.`,
+      text: `your otp is ${otp}. It is valid for 60s.`,
     };
 
     transporter.sendMail(mailOptions, (error, success) => {
@@ -141,10 +141,22 @@ const updateAdminProfile = async (req, res) => {
   }
 };
 
+const readAdminProfileData = async (req, res) => {
+  try {
+    const response = await Admin.find();
+    res
+      .status(200)
+      .json({ message: "Data fetched successfullly.", data: response });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error." });
+  }
+};
+
 module.exports = {
   adminRegister,
   loginAdmin,
   updateEmail,
   generateOtp,
   updateAdminProfile,
+  readAdminProfileData,
 };

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const parentCategorySchema = mongoose.Schema({
+const parentCategorySchema = new mongoose.Schema({
   name: "String",
   description: "String",
   status: "Boolean",

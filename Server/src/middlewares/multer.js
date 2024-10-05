@@ -18,4 +18,30 @@ const AdminProfile = multer({ storage: storage }).fields([
   { name: "profile", maxCount: 1 },
 ]);
 
-module.exports = AdminProfile;
+const productStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./src/uploads/products");
+  },
+  filename: (req, file, cb) => {
+    let fileExtension = path.extname(file.originalname);
+    cb(null, Date.now() + Math.floor(Math.random() * 100) + fileExtension);
+  },
+});
+
+const storyStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./src/uploads/stories");
+  },
+  filename: (req, file, cb) => {
+    let fileExtension = path.extname(file.originalname);
+    cb(null, Date.now() + Math.floor(Math.random() * 100) + fileExtension);
+  },
+});
+
+const ProductCategory = multer({ storage: storage }).single("thumbnail");
+module.exports = {
+  AdminProfile,
+  ProductCategory,
+  productStorage,
+  storyStorage,
+};

@@ -1,3 +1,5 @@
+// admin controllers
+
 // Admin Profile
 const {
   adminRegister,
@@ -5,7 +7,21 @@ const {
   updateEmail,
   generateOtp,
   updateAdminProfile,
+  readAdminProfileData,
 } = require("./admin-panel/admin/adminControllers");
+
+// colors
+const {
+  insertColor,
+  readColor,
+  updateColorStatus,
+  readColorById,
+  updateColor,
+  deleteColor,
+  deleteMultipleColor,
+} = require("./admin-panel/colors/color");
+
+// parentCategory controllers
 const {
   parentCategories,
   readParentCategory,
@@ -13,10 +29,70 @@ const {
   readParentCategoryById,
   updateCategory,
   deleteParentCategory,
+  deleteMultipleParentCategories,
+  ActiveParentCategory,
 } = require("./admin-panel/parent-category/parentCategory");
+
+// product Category
+
+const {
+  addProductCategory,
+  readProductCategory,
+  updateProductCategoryStatus,
+  readProductCategoryById,
+  updateProductCategory,
+  deleteProductCategory,
+  multiDeleteProductCategory,
+  activeProductCategory,
+} = require("./admin-panel/product-category/productCategory");
+
+// product
+const {
+  addProducts,
+  readProducts,
+  updateProductStatus,
+  deleteSingleProduct,
+  updateProductFindById,
+  updateProduct,
+  multiDeleteProduct,
+} = require("./admin-panel/product/product");
+
 // Size
-const { Size, readSize, updateSizeStatus } = require("./admin-panel/sizes/size");
-// admin controllers
+const {
+  Size,
+  readSize,
+  updateSizeStatus,
+  readSizeById,
+  updateSize,
+  deleteSize,
+  deleteMultipleSize,
+} = require("./admin-panel/sizes/size");
+
+// story controllers
+const {
+  addStory,
+  readStory,
+  updateStoryStatus,
+  deleteStory,
+  readStoryById,
+  updateStory,
+  multiDeleteStory,
+} = require("./admin-panel/story/stroy");
+
+// User Address
+const { addAddress, readAddress } = require("./admin-panel/users/user-address/userAddress");
+
+// user controller
+const {
+  userPasswordHashingAndGenerateOTP,
+  userRegistration,
+  userLogin,
+  readUser,
+  updateUserInfo,
+  updateUserPassword,
+  userGenerateOTPForForgotPassword,
+  userUpdateForgotPassword
+} = require("./admin-panel/users/user-registration/userRegistration");
 
 module.exports = {
   adminRegister,
@@ -24,6 +100,7 @@ module.exports = {
   updateEmail,
   generateOtp,
   updateAdminProfile,
+  readAdminProfileData,
   Size,
   parentCategories,
   readParentCategory,
@@ -32,5 +109,50 @@ module.exports = {
   updateCategory,
   deleteParentCategory,
   readSize,
-  updateSizeStatus
+  updateSizeStatus,
+  readSizeById,
+  updateSize,
+  deleteSize,
+  insertColor,
+  readColor,
+  updateColorStatus,
+  readColorById,
+  updateColor,
+  deleteColor,
+  deleteMultipleParentCategories,
+  deleteMultipleSize,
+  deleteMultipleColor,
+  addProductCategory,
+  ActiveParentCategory,
+  readProductCategory,
+  updateProductCategoryStatus,
+  readProductCategoryById,
+  updateProductCategory,
+  deleteProductCategory,
+  multiDeleteProductCategory,
+  activeProductCategory,
+  addProducts,
+  readProducts,
+  updateProductStatus,
+  deleteSingleProduct,
+  updateProductFindById,
+  updateProduct,
+  multiDeleteProduct,
+  addStory,
+  readStory,
+  updateStoryStatus,
+  deleteStory,
+  readStoryById,
+  updateStory,
+  multiDeleteStory,
+  userPasswordHashingAndGenerateOTP,
+  userRegistration,
+  userLogin,
+  readUser,
+  updateUserInfo,
+  updateUserPassword,
+  userGenerateOTPForForgotPassword,
+  userUpdateForgotPassword,
+  addAddress,
+  readAddress
 };
