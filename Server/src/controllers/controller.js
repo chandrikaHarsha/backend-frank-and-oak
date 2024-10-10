@@ -78,9 +78,21 @@ const {
   updateStory,
   multiDeleteStory,
 } = require("./admin-panel/story/stroy");
+// colors for product page
+const {
+  getColors,
+} = require("./website/users/available-product-colors/availableProductColors");
+
+// sizes for product page
+const { getSizes } = require("./website/users/product-sizes/productSizes");
+
+const { getProducts } = require("./website/users/products/products");
 
 // User Address
-const { addAddress, readAddress } = require("./admin-panel/users/user-address/userAddress");
+const {
+  addAddress,
+  readAddress,
+} = require("./website/users/user-address/userAddress");
 
 // user controller
 const {
@@ -91,8 +103,8 @@ const {
   updateUserInfo,
   updateUserPassword,
   userGenerateOTPForForgotPassword,
-  userUpdateForgotPassword
-} = require("./admin-panel/users/user-registration/userRegistration");
+  userUpdateForgotPassword,
+} = require("./website/users/user-registration/userRegistration");
 
 module.exports = {
   adminRegister,
@@ -154,5 +166,8 @@ module.exports = {
   userGenerateOTPForForgotPassword,
   userUpdateForgotPassword,
   addAddress,
-  readAddress
+  readAddress,
+  getSizes,
+  getColors,
+  getProducts,
 };

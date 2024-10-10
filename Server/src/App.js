@@ -8,6 +8,9 @@ const productRouter = require("./routes/admin/product/product");
 const storyRouter = require("./routes/admin/story/story");
 const userRouter = require("./routes/website/user-registration/user");
 const addressRouter = require("./routes/website/user-address/userAddress");
+const ProductSizesRouter = require("./routes/website/product-sizes/productSizes");
+const ColorRouter = require("./routes/website/product-colors/productColors");
+const ProductRouter = require("./routes/website/products/products");
 
 const allRoutes = express.Router();
 const websiteRouter = express.Router();
@@ -25,6 +28,9 @@ adminRouter.use("/stories", storyRouter);
 // WEBSITE ROUTES
 websiteRouter.use("/users", userRouter);
 websiteRouter.use("/address", addressRouter);
+websiteRouter.use("/sizes", ProductSizesRouter);
+websiteRouter.use("/colors", ColorRouter);
+websiteRouter.use("/products", ProductRouter);
 
 allRoutes.use("/admin-panel", adminRouter);
 allRoutes.use("/frankandoak-services", websiteRouter);
