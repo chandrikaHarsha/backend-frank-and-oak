@@ -86,7 +86,10 @@ const {
 // sizes for product page
 const { getSizes } = require("./website/users/product-sizes/productSizes");
 
-const { getProducts } = require("./website/users/products/products");
+const {
+  getProducts,
+  getProductById,
+} = require("./website/users/products/products");
 
 // User Address
 const {
@@ -170,4 +173,5 @@ module.exports = {
   getSizes,
   getColors,
   getProducts,
+  getProductById,
 };
