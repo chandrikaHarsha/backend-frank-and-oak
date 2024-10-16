@@ -89,6 +89,7 @@ const { getSizes } = require("./website/users/product-sizes/productSizes");
 const {
   getProducts,
   getProductById,
+  getProductsByIds,
 } = require("./website/users/products/products");
 
 // User Address
@@ -174,4 +175,5 @@ module.exports = {
   getColors,
   getProducts,
   getProductById,
+  getProductsByIds,
 };
